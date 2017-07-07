@@ -1,0 +1,81 @@
+#!/bin/sh
+#inkVerbBoss! verb.ink
+set -e
+
+# This installs Ubuntu Studio, what's left after install-vubuntu did  most of the work
+## Prerequesite: install-vubuntu
+
+# How to use:
+## sudo ./install-ubuntustudio
+
+
+# Check to make sure this is run as sudo, but not run by root
+## If root or sudo
+if [ "$(id -u)" = "0" ]; then
+## If sudo is NOT present
+ if [ -z "${SUDO_COMMAND}" ]; then
+echo "Run this as a sudoer sudo, not as root. You'll have to exit root and perhaps re-login as the sudoer. Then...
+like this:
+sudo ./install-ubuntustudio
+"
+exit 22
+ fi
+fi
+## If sudo is NOT present
+if [ -z "${SUDO_COMMAND}" ]; then
+echo "Run this as a sudoer sudo, not merely as a sudoer.
+like this:
+sudo ./install-ubuntustudio
+"
+exit 22
+fi
+
+# Check if Vrk installed on this machine
+if [ ! -f /var/local/vrk/machineinfo ]; then
+echo "Install Vrk first. See README.md"
+exit 22
+fi
+
+# Check status
+. /var/local/vrk/machineinfo
+if [ ${VUBUNTU_STUDIOLITE_INSTALLED} != "YES" ]; then
+echo "Some Vubuntu tools are not yet installed. Installing them now to make things easier. Don't leave...
+"
+/var/local/vrk/boss/install-vubuntu
+fi
+
+# Update & Upgrade
+apt update -yf --fix-missing
+apt upgrade -yf --fix-missing
+apt install -yf
+
+
+# Install Ubuntu Studio
+echo "Installing the full load of Ubuntu Studio..."
+
+apt install -y ubuntustudio-audio
+apt install -y ubuntustudio-audio-plugins
+apt install -y ubuntustudio-graphics
+apt install -y ubuntustudio-photography
+apt install -y ubuntustudio-publishing
+apt install -y ubuntustudio-video
+
+# Set configs
+echo "VUBUNTU_UBUNTUSTUDIO_INSTALLED=\"YES\"" >> /var/local/vrk/machineinfo
+touch /var/local/vrk/.vubuntu-ubuntustudio-installed
+
+# Finish
+apt autoremove -y
+echo "
+If no errors, done.
+
+If you want low-latency, use: sudo apt install linux-lowlatency
+
+Happy studio time!"
+
+if [ ${VUBUNTU_DESKTOP_INSTALLED} != "YES" ]; then
+echo "
+Vubuntu Desktop was also just installed. Now, run: set-vrk-desktop
+"
+fi
+
