@@ -1,0 +1,47 @@
+#!/bin/sh
+#inkVerbSurfer! verb.ink
+set -e
+
+# This uploads a local SSH key to a surfer's remote server for user no-password login
+
+# How to use:
+## ssh-keyportserver [surfer] [server-password] [new-port (optional)]
+
+
+GOSURFER=$1
+PASSWORD=$2
+NEWPORT=$3
+
+# Check if installed
+if [ ! -f ~/.vrk/configs/stationinfo ]; then
+echo "Install Vrk first. See README.md"
+exit 22
+fi
+
+# Check variables
+if [ -z $2 ]; then
+echo "You need to specify stuff, like this:
+addfilezillsurfer [surfer] [server-password] [new-port (optional)]
+"
+exit 22
+fi
+
+# Assign 22 if [new-port] option is left empty
+if [ -z $3 ]; then
+NEWPORT=22
+fi
+
+# Include the config
+. ~/.vrk/go/go.${GOSURFER}.malibu
+
+# Do it all in one command
+cat ~/.ssh/${KEYNAME}.pub | ssh -p ${GOPORT} ${GOUSER}@${GOIP} "sed -i '/Port.*/ c\Port ${NEWPORT}' /etc/ssh/sshd_config && sed -i '/PermitRootLogin.*/ c\PermitRootLogin without-password' /etc/ssh/sshd_config && systemctl reload ssh"
+expect "Password:"
+send "${PASSWORD}\r"
+
+# Finish
+echo "Keys thrown overboard cap'n.
+
+We'll be usin' yer thumbprint from now on.
+"
+

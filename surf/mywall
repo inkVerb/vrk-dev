@@ -20,13 +20,13 @@ exit 22
 fi
 
 # Check if Vubuntu Desktop installed on the machine
-if [ ! -f /var/local/vrk/.vubuntu-desktop-installed ]; then
+if [ ! -f /opt/vrk/.vubuntu-desktop-installed ]; then
 echo "Vubuntu Desktop hasn't been installed by any user on this machine.
 A Superuser/Sudoer needs to run install-vubuntu-desktop for this machine. See README.md"; exit 22
 fi
 
 # Check if Vubuntu Desktop installed on the machine
-if [ ! -f /var/local/vrk/.vubuntu-desktop-installed ]; then
+if [ ! -f /opt/vrk/.vubuntu-desktop-installed ]; then
 echo "Vubuntu Desktop hasn't been installed by any user on this machine.
 A Superuser/Sudoer needs to run install-vubuntu-desktop for this machine. See README.md"; exit 22
 fi
@@ -58,7 +58,7 @@ VRK_USER=$USER
 # Include the configs
 . /home/${VRK_USER}/.vrk/configs/stationinfo
 . /home/${VRK_USER}/.vrk/configs/lang/stationuser-dirs_EN
-. /var/local/vrk/machineinfo
+. /opt/vrk/machineinfo
 
 # Check-n-fix folder dependencies
 ## See that the myWall folder exists properly, whether in Vrk Cloud or home
@@ -143,8 +143,8 @@ fi
 #ln -sfn /home/${VRK_USER}/.vrk/myWall/linuxmint-my-cinn-wallpapers.xml /home/${VRK_USER}/.local/share/cinnamon-background-properties/
 #fi
 ### Own
-#chown -R ${VRK_USER} /home/${VRK_USER}/.local
-#chown -R ${VRK_USER} /home/${VRK_USER}/.config
+#chown -R ${VRK_USER}:${VRK_USER} /home/${VRK_USER}/.local
+#chown -R ${VRK_USER}:${VRK_USER} /home/${VRK_USER}/.config
 
 # Copy the file
 cp ${FILENAME} /home/${VRK_USER}/.vrk/myWall/

@@ -1,7 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Base16 - Gnome Terminal color scheme install script
 ## Thank you: https://github.com/anmoljagetia
 ## Normally run with: wget -O xt http://git.io/vn6HM && chmod +x xt && ./xt && rm xt
+
+# The gnome-terminal must be running in a separate window for this to work
 
 [[ -z "$PROFILE_NAME" ]] && PROFILE_NAME="mint-terminal"
 [[ -z "$PROFILE_SLUG" ]] && PROFILE_SLUG="mint-terminal"
@@ -67,6 +69,9 @@ if which "$DCONF" > /dev/null 2>&1; then
         dset bold-color-same-as-fg "true"
         dset use-theme-colors "false"
         dset use-theme-background "false"
+        dset use-theme-transparency "false"
+        dset use-transparent-background "true"
+        dset background-transparency-percent "16"
 
         unset PROFILE_NAME
         unset PROFILE_SLUG
@@ -114,9 +119,12 @@ gset string palette "#2E3436:#CC0000:#4E9A06:#C4A000:#3465A4:#75507B:#06989A:#D3
 gset string background_color "#000000"
 gset string foreground_color "#00FF00"
 gset string bold_color "#00FF00"
-gset bool   bold_color_same_as_fg "true"
-gset bool   use_theme_colors "false"
-gset bool   use_theme_background "false"
+gset bool bold_color_same_as_fg "true"
+gset bool use_theme_colors "false"
+gset bool use_theme_background "false"
+gset bool use_theme_transparency "false"
+gset bool use_transparent_background "true"
+gset int background_transparency_percent "16"
 
 unset PROFILE_NAME
 unset PROFILE_SLUG

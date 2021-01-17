@@ -1,14 +1,13 @@
 #!/bin/sh
 #inkVerbBoss! verb.ink
-set -e
 
 # This uninstalls Vrk Station folder and all settings from a user's home
 
 # How to use:
-## sudo ./uninstall-vrk
+## sudo uninstall-vrk
 
 # How to use on your local computer for another, non-sudo user:
-## sudo ./uninstall-vrk [user]
+## sudo uninstall-vrk [user]
 
 # NOTE: If you run this for yourself without a [user] declaration, then your .vrk folder will have a "boss" folder link.
 
@@ -33,7 +32,7 @@ if [ "$(id -u)" = "0" ]; then
  if [ -z "${SUDO_COMMAND}" ]; then
 echo "Run this as a sudoer sudo, not as root. You'll have to exit root and perhaps re-login as the sudoer. Then...
 like this:
-sudo ./uninstall-vrk
+sudo uninstall-vrk
 "
 exit 22
  fi
@@ -42,7 +41,7 @@ fi
 if [ -z "${SUDO_COMMAND}" ]; then
 echo "Run this as a sudoer sudo, not merely as a sudoer.
 like this:
-sudo ./uninstall-vrk
+sudo uninstall-vrk
 "
 exit 22
 fi
@@ -52,7 +51,7 @@ if [ -z $1 ]; then
 echo "
 !! IMPORTANT !!
 
-You are about to lose all your Vubuntu Vrk Station settings, including any gosurfers. Normal Ubuntu apps and desktop themes will NOT be uninstalled.
+You are about to lose all your Vrk Vrk Station settings, including any gosurfers. Normal Ubuntu apps and desktop themes will NOT be uninstalled.
 
 When this finishes, you will be logged out and the computer will reboot. Close all apps and get ready...
 
@@ -60,8 +59,8 @@ Are you ready to continue, then logout and reboot? Type \"yes\" to continue."
 read LOGOUTYES
  if [ ${LOGOUTYES} != "yes" ]; then
 echo "Exiting, not finished. You can run this again anytime via:
-cd /var/local/vrk/boss
-sudo ./uninstall-vrk
+cd /opt/vrk/boss
+sudo uninstall-vrk
 "
 exit 0
  fi
@@ -82,7 +81,7 @@ else
   if [ -d /home/${VRK_USER}/${VRK_CLOUD_DIR}/Vrk/"${VRK_DOCUMENTS_DIR}" ]; then
 rm -f /home/${VRK_USER}/"${VRK_DOCUMENTS_DIR}"
 cp -R /home/${VRK_USER}/${VRK_CLOUD_DIR}/Vrk/"${VRK_DOCUMENTS_DIR}" /home/${VRK_USER}/
-chown -R ${VRK_USER} /home/${VRK_USER}/${VRK_DOCUMENTS_DIR}
+chown -R ${VRK_USER}:${VRK_USER} /home/${VRK_USER}/${VRK_DOCUMENTS_DIR}
   fi
  fi
 ### Templates
@@ -90,7 +89,7 @@ chown -R ${VRK_USER} /home/${VRK_USER}/${VRK_DOCUMENTS_DIR}
    if [ -d /home/${VRK_USER}/${VRK_CLOUD_DIR}/Vrk/"${VRK_TEMPLATES_DIR}" ]; then
 rm -f /home/${VRK_USER}/"${VRK_TEMPLATES_DIR}"
 cp -R /home/${VRK_USER}/${VRK_CLOUD_DIR}/Vrk/"${VRK_TEMPLATES_DIR}" /home/${VRK_USER}/
-chown -R ${VRK_USER} /home/${VRK_USER}/${VRK_TEMPLATES_DIR}
+chown -R ${VRK_USER}:${VRK_USER} /home/${VRK_USER}/${VRK_TEMPLATES_DIR}
   fi
  fi
 ### Work folder
@@ -98,7 +97,7 @@ chown -R ${VRK_USER} /home/${VRK_USER}/${VRK_TEMPLATES_DIR}
   if [ -d /home/${VRK_USER}/${VRK_CLOUD_DIR}/Vrk/"${VRK_WORK_DIR}" ]; then
 rm -f /home/${VRK_USER}/"${VRK_WORK_DIR}"
 cp -R /home/${VRK_USER}/${VRK_CLOUD_DIR}/Vrk/"${VRK_WORK_DIR}" /home/${VRK_USER}/
-chown -R ${VRK_USER} /home/${VRK_USER}/${VRK_WORK_DIR}
+chown -R ${VRK_USER}:${VRK_USER} /home/${VRK_USER}/${VRK_WORK_DIR}
   fi
  fi
 fi
@@ -130,18 +129,6 @@ if [ -d /home/${VRK_USER}/"${VRK_VIDEOS_DIR}" ] && [ ! -d /home/${VRK_USER}/"${X
 fi
 rm -rf /home/${VRK_USER}/myLang
 cp /home/${VRK_USER}/.config/user-dirs.dirs.ink-bak /home/${VRK_USER}/.config/user-dirs.dirs
-
-# Remove myWall wallpapers
-## KDE, Budgie & Global
-rm -rf /home/${VRK_USER}/.local/share/backgrounds/myWall
-## GNOME
-rm -rf /home/${VRK_USER}/.local/share/gnome-background-properties/my-wall.xml
-## Xfce
-rm -rf /home/${VRK_USER}/.config/xfce4
-## MATE
-rm -rf /home/${VRK_USER}/.local/share/mate-background-properties/my-mate-wall.xml
-## Cinnamon
-rm -rf /home/${VRK_USER}/.local/share/cinnamon-background-properties/my-cinn-wall.xml
 
 # Remove installation
 rm -rf /home/${VRK_USER}/.vrk

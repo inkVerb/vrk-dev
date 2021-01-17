@@ -1,6 +1,5 @@
 #!/bin/sh
 #inkVerbMaker! verb.ink
-set -e
 
 # This installs the Vrk™ Cloud folder system for a user
 ## This needs some root permissions
@@ -8,10 +7,10 @@ set -e
 ## Prerequesite: Vrk™ must be installed
 
 # How to use on your local computer:
-## sudo ./install-vrk-cloud
+## sudo install-vrk-cloud
 
 # How to use on your local computer for another, non-sudo user:
-## sudo ./install-vrk-cloud [user - if not current sudoer] [cloud choice - optional]
+## sudo install-vrk-cloud [user - if not current sudoer] [cloud choice - optional]
 
 # NOTE: If you run this for yourself without a [user] declaration, then your .vrk folder will have a "boss" folder link.
 
@@ -35,19 +34,19 @@ if [ "$(id -u)" = "0" ]; then
  if [ -z "${SUDO_COMMAND}" ]; then
 echo "Run this as a sudoer sudo, not as root. You'll have to exit root and perhaps re-login as the sudoer. Then...
 like this:
-sudo ./install-vrk-cloud
+sudo install-vrk-cloud
 "
 exit 0; fi; fi
 ## If sudo is NOT present
 if [ -z "${SUDO_COMMAND}" ]; then
 echo "Run this as a sudoer sudo, not merely as a sudoer.
 like this:
-sudo ./install-vrk-cloud
+sudo install-vrk-cloud
 "
 exit 0; fi
 
 # Check if Vrk installed on this machine
-if [ ! -f /var/local/vrk/machineinfo ]; then
+if [ ! -f /opt/vrk/machineinfo ]; then
 echo "Install Vrk first. See README.md"
 exit 22; fi
 
@@ -59,10 +58,13 @@ exit 22; fi
 if [ ! -e /home/${VRK_USER}/.config/user-dirs.dirs ]; then
 echo "User has not logged in yet or lacks vital configs! Log in with the user one time, then try again."
 exit 22; fi
-if [ ! -e /home/${VRK_USER}/"${XDG_DOCUMENTS_DIR}" ]; then
+## Include dirs config
+. /home/${VRK_USER}/.config/user-dirs.dirs
+## Check if directories exist
+if [ ! -e "${XDG_DOCUMENTS_DIR}" ]; then
 echo "User does not have the ${XDG_DOCUMENTS_DIR} folder! Create that folder, then try again."
 exit 22; fi
-if [ ! -e /home/${VRK_USER}/"${XDG_TEMPLATES_DIR}" ]; then
+if [ ! -e "${XDG_TEMPLATES_DIR}" ]; then
 echo "User does not have the ${XDG_TEMPLATES_DIR} folder! Create that folder, then try again."
 exit 22; fi
 
@@ -109,7 +111,7 @@ fi
 # Include the configs
 . /home/${VRK_USER}/.vrk/configs/lang/stationuser-dirs_INITIAL
 . /home/${VRK_USER}/.vrk/configs/lang/stationuser-dirs_EN
-. /var/local/vrk/machineinfo
+. /opt/vrk/machineinfo
 
 # Setup the cloud
 if [ -z $2 ]; then
@@ -158,7 +160,7 @@ echo "Bye.
 exit 0
   fi
 ## Own the empty cloud
-chown -R ${VRK_USER} /home/${VRK_USER}/"${CLOUD_CHOICE}"
+chown -R ${VRK_USER}:${VRK_USER} /home/${VRK_USER}/"${CLOUD_CHOICE}"
  fi
 fi
 
@@ -179,7 +181,7 @@ fi
  if [ ! -d /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk ]; then
 	mkdir /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk
  fi
-chown -R ${VRK_USER} /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk
+chown -R ${VRK_USER}:${VRK_USER} /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk
 ### Templates
  if [ ! -d /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/"${VRK_TEMPLATES_DIR}" ]; then
   if [ -d /home/${VRK_USER}/"${VRK_TEMPLATES_DIR}" ]; then
@@ -226,16 +228,6 @@ ${VRK_WORK_DIR} already exists in your cloud and has been backed up to: ${VRK_WO
 "
   fi
  fi
-### myWall
- if [ ! -d /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/myWall-${VRK_USER} ]; then
-  if [ -d /home/${VRK_USER}/.vrk/myWall ]; then
-	mv /home/${VRK_USER}/.vrk/myWall /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/myWall-${VRK_USER}
-  fi
- else
-  if [ -d /home/${VRK_USER}/.vrk/myWall ]; then
-	mv /home/${VRK_USER}/.vrk/myWall/* /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/myWall-${VRK_USER}
-  fi
- fi
 ### myLanguage
  if [ -d /home/${VRK_USER}/myLang ]; then
 	ln -sfn /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/"${VRK_TEMPLATES_DIR}" /home/${VRK_USER}/myLang/"${XDG_TEMPLATES_DIR}"
@@ -246,10 +238,8 @@ ${VRK_WORK_DIR} already exists in your cloud and has been backed up to: ${VRK_WO
 ln -sfn /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/"${VRK_TEMPLATES_DIR}" /home/${VRK_USER}/
 ln -sfn /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/"${VRK_DOCUMENTS_DIR}" /home/${VRK_USER}/
 ln -sfn /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/"${VRK_WORK_DIR}" /home/${VRK_USER}/
-ln -sfn /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/myWall-${VRK_USER} /home/${VRK_USER}/.vrk/myWall
-ln -sfn /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/myWall-${VRK_USER} /home/${VRK_USER}/.local/share/backgrounds/myWall
 ### Xfce/Mint-Xfce/UbuntuStudio (Does't like Templates in a linked folder)
- if [ "${LINUX_DISTRO}" = "xubuntu" ] || [ "${LINUX_DISTRO}" = "xfce" ] || [ "${LINUX_DISTRO}" = "ubuntustudio" ] ; then
+ if [ "${LINUX_DESKTOP}" = "xubuntu" ] || [ "${LINUX_DESKTOP}" = "xfce" ] || [ "${LINUX_DESKTOP}" = "ubuntustudio" ] ; then
 rm -f /home/${VRK_USER}/"${VRK_TEMPLATES_DIR}"
 mv /home/${VRK_USER}/"${CLOUD_CHOICE}"/Vrk/"${VRK_TEMPLATES_DIR}"-vback /home/${VRK_USER}/"${VRK_TEMPLATES_DIR}"
   if [ -d /home/${VRK_USER}/myLang ]; then
@@ -267,11 +257,11 @@ fi
 if [ -n ${CLOUD_CHOICE} ]; then
 echo "Alright, Sparky! Vrk station is now syncing with ${CLOUD_CHOICE}.
 
-${VRK_WORK_DIR}, Documents, Templates, and myWall folders on this Vrk Station (computer) will be backed up to the \"${CLOUD_CHOICE}/Vrk\" folder, whenever ${CLOUD_CHOICE} is installed if it isn't already.
+${VRK_WORK_DIR}, Documents & Templates folders on this Vrk Station (computer) will be backed up to the \"${CLOUD_CHOICE}/Vrk\" folder, whenever ${CLOUD_CHOICE} is installed if it isn't already.
 Anything you put in ${XDG_TEMPLATES_DIR} will be in your \"New Document\" context menu, and synced across all stations.
 "
 ## Xfce/Mint-Xfce/UbuntuStudio notice
- if [ "${LINUX_DISTRO}" = "xubuntu" ] || [ "${LINUX_DISTRO}" = "xfce" ] || [ "${LINUX_DISTRO}" = "ubuntustudio" ] ; then
+ if [ "${LINUX_DESKTOP}" = "xubuntu" ] || [ "${LINUX_DESKTOP}" = "xfce" ] || [ "${LINUX_DESKTOP}" = "ubuntustudio" ] ; then
 echo "FYI: Because you are using Xfce, your Templates will NOT be synced across machines automatically.
 
 You still have a folder in CLOUD/Vrk/Templates which is synced, but on this machine you must keep CLOUD/Vrk/Templates and Templates synced yourself.

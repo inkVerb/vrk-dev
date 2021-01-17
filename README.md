@@ -1,13 +1,12 @@
 # Vrk
-Vrk supercharges your ubuntu desktop experience by "breaking it in" with settings, theming, wallpapers, apps, and more.
+Vrk supercharges your Manjaro desktop experience by implementing common settings and useful tools
 
-###### Environments
-- Xfce (Xubuntu/UbuntuStudio) has the most support, with 1/4 window hotkey tiling and even the "Xfdashboard" window spread.
-- GNOME & Budgie are well-supported provide a rather awesome experience already, so they have just a little less tweaking.
-- MATE is semi-supported, but not much since it is a legacy by definition.
-- Mint (Cinnamon, Xfce, and MATE) is supported, but already makes things "Minty", so it has few changes so as not to interfere.
+###### Supported Environments
+- Xfce: Supported and settings applied
+- GNOME: Supported and settings applied
+- KDE: Supported, no settings applied
 
-###### Xubuntu/UbuntuStudio Hotkeys:
+###### Xfce Hotkeys:
 Win          opens the menu, finally.
 Ctrl + Win + Up/Down/Right/Left tiles your window in 1/2 screen.
 Shft + Win + Up/Down/Right/Left tiles your window in 1/4 screen on the top.
@@ -15,27 +14,11 @@ Alt  + Win + Up/Down/Right/Left tiles your window in 1/4 screen on the bottom.
 Ctrl + Win + Alt shows your window spread & dashboard.
 Scroll on the desktop to switch workspaces.
 
-###### Other environments
-- Unity does retain legacy support and is quite awesome with Vrk. Vrk "desktop" was originally written to make Unity 7 "less unbearable". In the end, Unity 7.5 with the Vrk Desktop scripts weren't only "less unbearable", but made a pretty awesome desktop experience. Unity legacy will remain as long as Ubuntu 16.04 LTS is supported, likely through 2021. Eventually, Vrk may put Unity 8 for tablets into the mix, cheers to the guys over at [http://UBports.com]! Shuttleworth, you weren't wrong, just busy changing the world where you were most needed.
-- KDE/Kubuntu? No way. The roadmap for KDE is already awesome and doesn't need help, it's desktop preferences (viz no Ctrl+Alt+T terminal, abnormal Dolphin file manager actions, etc.) are too weird for "Vrkers", and it's too buggy and doesn't always boot up for development. KDE is anti-supported by the release of Vrk beta 0.4. That said, KDE has awesome ideas. IMHO, their talent is wasted on desktop; they need to focus on making their awesome apps awesomerer. The same could be said of MATE, but legacy GNOME is understandable, except they at least need easy-accessed search. We need fewer desktop environments to spend our developer energies on, not more.
-- LXDE and others, sorry, really. If you want, write in the support and make a pull request.
-- Manjaro/Arch support is coming. The code has already been written in anticipation of this so the pacman installers can just be dropped in.
-
-##### BETA:
-This has only been tested with Ubuntu: Xfce (Xubuntu), Unity (Ubuntu, legacy but still working for the 16.04 LTS), GNOME, KDE, Cinnamon, and Mate. Linuxmint has limited testing, but should theoretically work. Manjaro is a later goal.
-
-##### ALL REPOS MUST WORK!!!
-*If you get "E:" error messages after running* `sudo apt update` *then you need to go to Software & Updates > Other Software, and then remove whatever ppa repo is in the error message.*
-
-*If you have errors in `sudo apt update` then Vrk will not install because your system just has too many loose bolts. Button up first, then "get to Vrk". (Did you see what I did there?)*
-
-Read the README.md before reporting problems! !! Seriously.
-
 # What is Vrk?
 - inkVerb's Vrk app is a collection of simple scripts that sets up a useful configuration for main Ubuntu distros
 - The installer adds many apps, settings, and special Vrk shell scripts, including scripts that make SSH, Git, and FileZilla easier to integrate.
 - A hidden folder will be created in home: `.vrk`. It contains `.vrk/boards`, which has a list of files you can run...
-- In `.vrk/boards`, all normal script files (green, from vrk/surf and vrk/droids) in `.vrk/boards` you can run from any working directory. Symlinked (light blue, linked from vrk/boss) require being in the`.vrk/boards` directory and using `sudo ./` these only show up for sudoers who ran `install-vrk` themselves.
+- In `.vrk/boards`, all normal script files (green, from vrk/surf) in `.vrk/boards` you can run from any working directory. Symlinked (light blue, linked from vrk/boss) require being in the`.vrk/boards` directory and using `sudo ./` these only show up for sudoers who ran `install-vrk` themselves.
 - All these `boards` have their own purpose and instructions at the top of the files. READ THEM!
 - HAVE FUN! !! Seriously.
 
@@ -50,7 +33,7 @@ Read the README.md before reporting problems! !! Seriously.
 
 `cd /vrk/inst`
 
-`chmod +x govrk`
+`chmod ug+x govrk`
 
 `sudo ./govrk $DESKTOP_SESSION`
 
@@ -72,7 +55,7 @@ However, if you want that user to have sudo privileges for Vrk "boss" tools, tha
 
 After install, this is how to install Vrk for a second sudo user:
 
-`cd /var/local/vrk/boss`
+`cd /opt/vrk/boss`
 
 `sudo ./install-vrk`
 
@@ -97,7 +80,7 @@ Now, the user that ran this will have Vrk in his own system.
 
 `cd /vrk/inst`
 
-`chmod +x upvrk`
+`chmod ug+x upvrk`
 
 `sudo ./upvrk $DESKTOP_SESSION`
 
@@ -113,7 +96,7 @@ Note: Update version numbers reference the framework. Ongoing updates continue f
    *Colorful linked files are "Bosses" that install and change things and require sudo. Run them with:*
 
    `cd .vrk/boards`
- 
+
    `sudo ./WHATEVER-BOSS`
 
 2. `configs` has stuff you only want to touch if you don't mind messing up everything and really want to learn how Vrk works.
@@ -149,7 +132,8 @@ Note: Update version numbers reference the framework. Ongoing updates continue f
      ssh-guake-on                  # sets guake-indicator menu to stop loading at starup and guake instead
 
 ## Droids
-- Droids are located in `/var/local/vrk/droids`.
+- Droids are located in `/opt/vrk/droids/USER/`.
+- Droids located in `/opt/vrk/droids/ALL/` can be used by all users.
 - Droids are not changed or removed with an update and you can add them yourself.
 - Droids can perform sudo tasks, but unlike bosses, they are included in your path. So, you can run them without ./ and sudo is optional.
 
@@ -191,7 +175,7 @@ Note: Update version numbers reference the framework. Ongoing updates continue f
 - Vrk has back-end "machine names" such as VRK_DESKTOP_DIR to match XDG_DESKTOP_DIR, via ~/.vrk/configs/lang/stationuser-dirs_CURRENT
 - Vrk vrk adds two machine names VRK_WORK_DIR (Work folder) and VRK_CLOUD_DIR (primary cloud folder) via ~/.vrk/configs/stationinfo
 - Vrk changes all folders from whatever language into English, for programming ease.
-- If the user's initially installed folders are non-English, Vrk creates ~/MyLang/ and with links to all home folders in the original language, for user reference. English folder names are easier for coding.
+- If the user's initially installed folders are non-English, Vrk creates ~/myLang/ and with links to all home folders in the original language, for user reference. English folder names are easier for coding.
 
 ### Names
 - Vrk's various scripts that do different jobs are called "Surfers". Surfers that require sudo are called "Bosses", but aren't available to non-sudoers.
@@ -207,7 +191,7 @@ Note: Update version numbers reference the framework. Ongoing updates continue f
 - A Vrk Station can control many clouds quickly and easily, but also has integration with OpenSource "Verber" servers, see the inkVerb GitHub project and http://verb.ink
 
 ### Back-end
-- When you install, the vrk "core" folder will move to /var/local/, then creates a .vrk folder in your home withconfigs and links to the core.
+- When you install, the vrk "core" folder will move to opt/, then creates a .vrk folder in your home withconfigs and links to the core.
 - You will need to copy vrk to the home folder each time you want to install it for a user. It's somewhat a one-user-machine app, but can work for others.
 - To update Vrk, run the updatevrk Surfer.
 
@@ -218,5 +202,3 @@ Note: Update version numbers reference the framework. Ongoing updates continue f
 - Included with installvubuntu is Docky with a rollup of several common apps and a transparent dock configuration, some normal settings for Guake, and the like.
 - Vubuntu is a long-term plan as a possible distro, but aims to work as a seamless add-on for the main Ubuntu distro desktops. If ever a distro, it owuld aim for easy desktop environment changes.
 - Note, installvubuntu includes Chris' Dynamic Compressor plugin for Audacity. We remember.
-
-
