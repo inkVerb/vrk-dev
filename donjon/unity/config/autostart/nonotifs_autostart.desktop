@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=Autostart NoNotifs
-Exec=/bin/bash -c "sleep 15 && /opt/nonotifs/nonotifs/run_nn"
-Type=Application
-X-GNOME-Autostart-enabled=true
