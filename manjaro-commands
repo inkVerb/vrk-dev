@@ -14,22 +14,29 @@ sudo pacman -S rhythmbox --noconfirm
 sudo pacman -S vlc --noconfirm
 sudo pacman -S obs-studio --noconfirm
 sudo pacman -S kdenlive --noconfirm
+sudo pacman -S shotcut --noconfirm
+sudo pacman -S musescore --noconfirm
 sudo pacman -S audacity --noconfirm
+sudo pacman -S kid3 --noconfirm
+sudo pacman -S ffmpeg --noconfirm
 sudo pacman -S gimp --noconfirm
+sudo pacman -S mypaint --noconfirm
 sudo pacman -S inkscape --noconfirm
+sudo pacman -S blender --noconfirm
+sudo pacman -S synfigstudio --noconfirm
 sudo pacman -S libreoffice --noconfirm
 sudo pacman -S atom --noconfirm
 sudo pacman -S git --noconfirm
 sudo pacman -S htop --noconfirm
 sudo pacman -S vim --noconfirm
+sudo pacman -S nano --noconfirm
 sudo pacman -S nextcloud-client --noconfirm
 sudo pacman -S gnome-tweak-tool --noconfirm
-sudo pacman -S latte-dock --noconfirm
 sudo pacman -S discord --noconfirm
 sudo pacman -S tex-gyre-fonts ttf-ubuntu-font-family font-bh-ttf noto-fonts ttf-ibm-plex ttf-liberation ttf-dejavu ttf-junicode gnu-free-fonts ttf-droid ttf-linux-libertine font-bh-ttf gentium-plus-font ttf-cascadia-code ttf-anonymous-pro ttf-jetbrains-mono adobe-source-sans-pro-fonts --noconfirm
 sudo pacman -S adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts --noconfirm # Chinese/Japanese/Korean
 
-# AUR
+# AUR package manager
 sudo pacman -S base-devel git --noconfirm # Dependencies
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -39,11 +46,25 @@ rm -rf yay
 
 # AUR Packages
 yay -S google-chrome --noconfirm
+yay -S skype --noconfirm
 yay -S dropbox --noconfirm
+yay -S subtitlecomposer --noconfirm
 yay -S adduser --noconfirm
 yay -S ttf-ms-fonts ttf-vista-fonts --noconfirm
 yay -S ebgaramond-otf otf-bodoni ttf-courier-prime ttf-google-fonts-git otf-jost ttf-tahomaA --noconfirm
 yay -S otf-gfs ttf-mgopen opensiddur-hebrew-fonts culmus --noconfirm # Hebrew & Greek
+
+# Spotify
+yay -S spotify --noconfirm
+## Fix Spotify bugs:
+pamac install xdg-desktop-portal-gtk
+dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
+dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+
+# Wine
+sudo pacman -S wine winetricks --noconfirm
 
 # Terminals
 yay -S xfce4-terminal --noconfirm
@@ -74,6 +95,10 @@ gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface toolbar-detachable false
 gsettings set org.gnome.desktop.notifications show-banners false
 gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+
+#gsettings set org.gnome.desktop.background show-desktop-icons true
+#gsettings set org.gnome.nautilus.icon-view default-zoom-level 'small'
+#gsettings set org.gnome.nautilus.preferences use-experimental-views false
 
 ## Set Lockscreen to "never" (uint32 0)
 gsettings set org.gnome.desktop.session idle-delay "uint32 0"
@@ -113,3 +138,10 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "'xfce4-terminal'"
 
 
+# Mont Disk at boot
+1. sudo blkid # Get info of device (UUID & TYPE)
+2. sudo mkdir /mnt/sda3 # Create the mount directory
+3. sudo vim /etc/fstab # Add the following entry:
+# Format: UUID=<uuid-of-your-drive>  <mount-point>  <file-system-type>  <mount-option>  <dump>  <pass>
+# Exampl: UUID=7953d115-6c12-4810-80a8-68ab94995e96  /mnt/sda3  ext4  defaults,noatime 0 2
+4. sudo mount -a # reload

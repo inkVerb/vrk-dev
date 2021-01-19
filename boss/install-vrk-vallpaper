@@ -13,7 +13,7 @@
 ## Room name
 VALL_ROOM="vrk"
 ## Root Lockscreen
-ROOT_LOCK_VALL="Vrk-Mesh-Disk.png"
+#ROOT_LOCK_VALL="Vrk-Mesh-Disk.png"
 
 # Set location of Vallpaper install folder
 ## This can be absolute; or relative ie if via git clone
@@ -82,8 +82,8 @@ for x in * .[!.]* ..?*; do if [ -L "$x" ] && ! [ -e "$x" ]; then rm -- "$x"; fi;
 fi
 
 # Install Vrk vallpapers
-## Global (GNOME, KDE, Budgie)
-### If "backgrounds" doesn't exist (KDE, cough cough)
+## Gnome/global
+### If "backgrounds" doesn't exist
 mkdir -p /usr/share/backgrounds
 mkdir -p /usr/share/gnome-background-properties
 rm -rf /usr/share/backgrounds/${VALL_ROOM}
@@ -98,6 +98,7 @@ for x in * .[!.]* ..?*; do if [ -L "$x" ] && ! [ -e "$x" ]; then rm -- "$x"; fi;
 ### Remove any broken symlinks
 cd /usr/share/gnome-background-properties/
 for x in * .[!.]* ..?*; do if [ -L "$x" ] && ! [ -e "$x" ]; then rm -- "$x"; fi; done
+
 ## Xfce
 if [ "${LINUX_DESKTOP}" = "xubuntu" ] || [ "${LINUX_DESKTOP}" = "xfce" ] ; then
 #### DEV NOTE: In Linuxmint Xfce, /usr/share/xfce4/backdrops is a symlink containing native backgrounds for both
@@ -107,6 +108,7 @@ ln -sfn /opt/vall/rooms/${VALL_ROOM}/${VALL_ROOM}/*.jpg /usr/share/xfce4/backdro
 cd /usr/share/xfce4/backdrops/
 for x in * .[!.]* ..?*; do if [ -L "$x" ] && ! [ -e "$x" ]; then rm -- "$x"; fi; done
 fi
+
 ## UbuntuStudio
 if [ "${LINUX_DESKTOP}" = "ubuntustudio" ]; then
 #### DEV NOTE: in UbuntuStudio, /usr/share/xfce4/backdrops is a symlink to /usr/share/backgrounds/ubuntustudio, containing native backgrounds for both
@@ -116,6 +118,7 @@ ln -sfn /opt/vall/rooms/${VALL_ROOM}/${VALL_ROOM}/*.jpg /usr/share/backgrounds/u
 cd /usr/share/backgrounds/ubuntustudio/
 for x in * .[!.]* ..?*; do if [ -L "$x" ] && ! [ -e "$x" ]; then rm -- "$x"; fi; done
 fi
+
 ## MATE
 if [ -d /usr/share/mate-background-properties ]; then
 ln -sfn /opt/vall/rooms/${VALL_ROOM}/${VALL_ROOM}/mate-${VALL_ROOM}.xml /usr/share/mate-background-properties/
@@ -123,6 +126,7 @@ ln -sfn /opt/vall/rooms/${VALL_ROOM}/${VALL_ROOM}/mate-${VALL_ROOM}.xml /usr/sha
 cd /usr/share/mate-background-properties/
 for x in * .[!.]* ..?*; do if [ -L "$x" ] && ! [ -e "$x" ]; then rm -- "$x"; fi; done
 fi
+
 ## Cinnamon
 if [ -d /usr/share/cinnamon-background-properties ]; then
 ln -sfn /opt/vall/rooms/${VALL_ROOM}/${VALL_ROOM}/cinnamon-${VALL_ROOM}.xml /usr/share/cinnamon-background-properties/
