@@ -2,10 +2,9 @@
 chsh -s /bin/bash # Now you must re-login
 #chsh -s /bin/zsh # Changes back to native Manjaro shell
 
-sudo pacman -Syyu
---noconfirm
+sudo pacman -Syyu --noconfirm
 
-sudo pacman -S chromium pepper-flash
+sudo pacman -S chromium pepper-flash --noconfirm
 sudo pacman -S vivaldi vivaldi-ffmpeg-codecs --noconfirm
 sudo pacman -S thunderbird --noconfirm
 sudo pacman -S filezilla --noconfirm
@@ -51,7 +50,7 @@ yay -S dropbox --noconfirm
 yay -S subtitlecomposer --noconfirm
 yay -S adduser --noconfirm
 yay -S ttf-ms-fonts ttf-vista-fonts --noconfirm
-yay -S ebgaramond-otf otf-bodoni ttf-courier-prime ttf-google-fonts-git otf-jost ttf-tahomaA --noconfirm
+yay -S ebgaramond-otf otf-bodoni ttf-courier-prime ttf-google-fonts-git otf-jost ttf-tahoma --noconfirm
 yay -S otf-gfs ttf-mgopen opensiddur-hebrew-fonts culmus --noconfirm # Hebrew & Greek
 
 # Spotify
@@ -97,8 +96,6 @@ gsettings set org.gnome.desktop.notifications show-banners false
 gsettings set org.gnome.desktop.notifications show-in-lock-screen false
 
 #gsettings set org.gnome.desktop.background show-desktop-icons true
-#gsettings set org.gnome.nautilus.icon-view default-zoom-level 'small'
-#gsettings set org.gnome.nautilus.preferences use-experimental-views false
 
 ## Set Lockscreen to "never" (uint32 0)
 gsettings set org.gnome.desktop.session idle-delay "uint32 0"
@@ -110,12 +107,6 @@ gsettings set org.gnome.desktop.interface gtk-theme "Matcha-dark-sea"
 #gsettings set org.gnome.desktop.interface gtk-theme "Yosemite-dark"
 #gsettings set org.gnome.desktop.interface icon-theme "Surfn-Majestic"
 #gsettings set org.gnome.desktop.interface cursor-theme "DMZ-Black"
-
-## Launcher
-gsettings set org.gnome.shell favorite-apps "['nautilus.desktop', 'vivaldi-stable.desktop', 'google-chrome.desktop', 'chromium-browser.desktop', 'firefox.desktop', 'thunderbird.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Todo.desktop', 'gedit.desktop', 'libreoffice-writer.desktop', 'atom.desktop', 'rhythmbox.desktop', 'gnome-calculator.desktop', 'gnome-calculator_gnome-calculator.desktop']"
-
-## Hot corners
-gsettings set org.gnome.shell enable-hot-corners true
 
 # Gedit
 gsettings set org.gnome.gedit.preferences.editor wrap-mode none

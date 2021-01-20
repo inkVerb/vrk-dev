@@ -112,7 +112,7 @@ cp -r /opt/vrk/donjon/configs-inst /home/${VRK_USER}/.vrk/configs
 fi
 chown -R ${VRK_USER}:${VRK_USER} /home/${VRK_USER}/.vrk
 ## For a sudoer
-if [ -n "$2" ] && [ "$2" = -b ]; then
+if [ -z $1 ] || [ -n "$2" ] && [ "$2" = -b ]; then
 ln -sfn /opt/vrk/boss/* /home/${VRK_USER}/.vrk/boards/
 fi
 
@@ -137,7 +137,7 @@ sudo -u ${VRK_USER} sed -i "s/VRK_INSTALLED=.*/VRK_INSTALLED=\"YES\"/g" /home/${
 . /opt/vrk/vrkverno
 sudo -u ${VRK_USER} sed -i "s/USER_KVERNO=.*/USER_KVERNO=${KVERNO}/g" /home/${VRK_USER}/.vrk/configs/stationinfo
 
-if [ -n "$2" ] && [ "$2" = -b ]; then
+if [ -z $1 ] || [ -n "$2" ] && [ "$2" = -b ]; then
 sudo -u ${VRK_USER} sed -i "s/USER_BOSSYN=.*/USER_BOSSYN=\"CAN_BOSS\"/g" /home/${VRK_USER}/.vrk/configs/stationinfo
 else
 sudo -u ${VRK_USER} sed -i "s/USER_BOSSYN=.*/USER_BOSSYN=\"NOT_BOSS\"/g" /home/${VRK_USER}/.vrk/configs/stationinfo
@@ -145,7 +145,7 @@ fi
 
 # Other Jobs
 ## Locale (if after Lang Dirs change, it creates a dialogue at the next login. DO THIS FIRST!)
-/home/${SUDO_USER}/.vrk/boards/vrklocale
+/opt/vrk/boss/vrklocale
 
 ## Mouse cursor theme for Xfce
 if [ "${LINUX_DESKTOP}" = "xfce" ] ; then
@@ -188,10 +188,10 @@ sed -i "s/[User]/[User]\nIcon=\/var\/lib\/AccountsService\/icons\/${VRK_USER}/" 
 fi
 
 ## Vrk dirs (Work)
-/home/${SUDO_USER}/.vrk/boards/install-vrk-dirs ${VRK_USER}
+/opt/vrk/boss/install-vrk-dirs ${VRK_USER}
 
 ## English home/ dirs
-/home/${SUDO_USER}/.vrk/boards/install-vrk-langdirs ${VRK_USER}
+/opt/vrk/boss/install-vrk-langdirs ${VRK_USER}
 
 # Get the config
 . /home/${VRK_USER}/.vrk/configs/stationinfo
