@@ -1216,7 +1216,8 @@ fi
 # BASH prompt
 chsh -s /bin/bash # Set BASH for the terminal
 cp ~/.bashrc ~/.bashrc-vrkbak
-sed -i "s:\\\W:\\\w:g" ~/.bashrc
+## Make the prompt setting like this: # PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \[\033[01;34m\]\w\[\033[01;32m\]]\$\[\033[00m\] '
+sed -i "s:\\\W:\\\[\\\033[01;34m\\\]\\\w:g" ~/.bashrc
 
 # Configs
 sed -i "s/VRK_DESKTOP_SET=.*/VRK_DESKTOP_SET=\"YES\"/g" ~/.vrk/configs/stationinfo
