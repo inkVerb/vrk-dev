@@ -1213,6 +1213,10 @@ fi
 fi
 ## 16.04 ##
 
+# BASH prompt
+chsh -s /bin/bash # Set BASH for the terminal
+cp ~/.bashrc ~/.bashrc-vrkbak
+sed -i "s:\\\W:\\\w:g" ~/.bashrc
 
 # Configs
 sed -i "s/VRK_DESKTOP_SET=.*/VRK_DESKTOP_SET=\"YES\"/g" ~/.vrk/configs/stationinfo
