@@ -17,6 +17,7 @@ sudo pacman -S shotcut --noconfirm
 sudo pacman -S musescore --noconfirm
 sudo pacman -S audacity --noconfirm
 sudo pacman -S kid3 --noconfirm
+sudo pacman -S gnome-music --noconfirm
 sudo pacman -S ffmpeg --noconfirm
 sudo pacman -S gimp --noconfirm
 sudo pacman -S mypaint --noconfirm
