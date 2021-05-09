@@ -50,6 +50,7 @@ yay -S skype --noconfirm
 yay -S dropbox --noconfirm
 yay -S subtitlecomposer --noconfirm
 yay -S adduser --noconfirm
+yay -S twinkle --noconfirm
 yay -S ttf-ms-fonts ttf-vista-fonts --noconfirm
 yay -S ebgaramond-otf otf-bodoni ttf-courier-prime ttf-google-fonts-git otf-jost ttf-tahoma --noconfirm
 yay -S otf-gfs ttf-mgopen opensiddur-hebrew-fonts culmus --noconfirm # Hebrew & Greek
@@ -129,6 +130,8 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding "'<Ctrl><Alt>x'"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "'xfce4-terminal'"
 
+# LibreOffice Spellcheck Extension
+https://sourceforge.net/projects/aoo-extensions/files/17102/62/dict-en-20210201.oxt/download
 
 # Mont Disk at boot
 1. sudo blkid # Get info of device (UUID & TYPE)
