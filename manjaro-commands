@@ -81,7 +81,8 @@ sudo sed -i "s/#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
 echo 'nnoremap <C-c> "+y
 vnoremap <C-c> "+y
 nnoremap <C-p> "+p
-vnoremap <C-p> "+p' > .vimrc
+vnoremap <C-p> "+p
+syntax on' > .vimrc
 
 ## Desktop
 dconf write /org/gnome/desktop/input-sources/xkb-options "['compose:caps']"

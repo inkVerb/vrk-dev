@@ -144,7 +144,8 @@ fi
 echo 'nnoremap <C-c> "+y
 vnoremap <C-c> "+y
 nnoremap <C-p> "+p
-vnoremap <C-p> "+p' > ~/.vimrc
+vnoremap <C-p> "+p
+syntax on' > ~/.vimrc
 
 
 # BASH prompt for root and new user template
