@@ -3,6 +3,7 @@ chsh -s /bin/bash # Now you must re-login
 #chsh -s /bin/zsh # Changes back to native Manjaro shell
 
 sudo pacman -Syyu --noconfirm
+sudo pacman -Sc
 
 sudo pacman -S chromium pepper-flash --noconfirm
 sudo pacman -S vivaldi vivaldi-ffmpeg-codecs --noconfirm
@@ -54,6 +55,7 @@ yay -S twinkle --noconfirm
 yay -S ttf-ms-fonts ttf-vista-fonts --noconfirm
 yay -S ebgaramond-otf otf-bodoni ttf-courier-prime ttf-google-fonts-git otf-jost ttf-tahoma --noconfirm
 yay -S otf-gfs ttf-mgopen opensiddur-hebrew-fonts culmus --noconfirm # Hebrew & Greek
+yay -S rss-glx --noconfirm
 
 # Spotify
 yay -S spotify --noconfirm
@@ -134,7 +136,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 # LibreOffice Spellcheck Extension
 https://sourceforge.net/projects/aoo-extensions/files/17102/62/dict-en-20210201.oxt/download
 
-# Mont Disk at boot
+# Mount Disk at boot
 1. sudo blkid # Get info of device (UUID & TYPE)
 2. sudo mkdir /mnt/sda3 # Create the mount directory
 3. sudo vim /etc/fstab # Add the following entry:
