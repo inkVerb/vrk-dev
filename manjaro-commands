@@ -4,6 +4,7 @@ chsh -s /bin/bash # Now you must re-login
 
 sudo pacman -Syyu --noconfirm
 sudo pacman -Sc
+sudo yay -Syyu --noconfirm # Update UAR packages
 
 sudo pacman -S chromium pepper-flash --noconfirm
 sudo pacman -S vivaldi vivaldi-ffmpeg-codecs --noconfirm
@@ -135,6 +136,15 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 
 # LibreOffice Spellcheck Extension
 https://sourceforge.net/projects/aoo-extensions/files/17102/62/dict-en-20210201.oxt/download
+
+# BASH prompt
+chsh -s /bin/bash
+sudo cp /etc/skel/.bashrc /etc/skel/.bashrc-vrkbak
+sudo cp /root/.bashrc /root/.bashrc-vrkbak
+sed -i "s:\\\W:\\\[\\\033[01;34m\\\]\\\w:g" ~/.bashrc
+sed -i "s:\\\W:\\\[\\\033[01;34m\\\]\\\w:g" /etc/skel/.bashrc
+sed -i "s:\\\W:\\\[\\\033[01;34m\\\]\\\w:g" /root/.bashrc
+
 
 # Mount Disk at boot
 1. sudo blkid # Get info of device (UUID & TYPE)

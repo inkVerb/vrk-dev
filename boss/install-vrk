@@ -155,6 +155,7 @@ ln -fs /usr/share/icons/DMZ-Black/cursor.theme /etc/alternatives/x-cursor-theme
 fi
 
 # Text editor themes for Gedit
+mkdir -p /usr/share/gtksourceview-4/styles/
 cp -f /opt/vrk/donjon/gedit/*.xml /usr/share/gtksourceview-4/styles/
 
 # Vrk avatar icon
