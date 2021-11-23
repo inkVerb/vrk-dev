@@ -87,6 +87,9 @@ nnoremap <C-p> "+p
 vnoremap <C-p> "+p
 syntax on' > ~/.vimrc
 
+## Atom packages
+apm install linter linter-php linter-jshint linter-python linter-ui-default intentions busy-signal highlight-selected minimap minimap-highlight-selected
+
 ## Desktop
 dconf write /org/gnome/desktop/input-sources/xkb-options "['compose:caps']"
 gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
