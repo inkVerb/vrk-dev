@@ -90,7 +90,7 @@ syntax on' > ~/.vimrc
 ## Atom packages
 apm install linter linter-php linter-jshint linter-python linter-ui-default intentions busy-signal highlight-selected minimap minimap-highlight-selected
 
-## Desktop
+## Desktop # These can be seen in dconf-editor
 dconf write /org/gnome/desktop/input-sources/xkb-options "['compose:caps']"
 gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
 gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
@@ -101,8 +101,18 @@ gsettings set org.gnome.desktop.wm.preferences focus-new-windows 'smart'
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface toolbar-detachable false
+gsettings set org.gnome.desktop.interface toolbar-icons-size 'small'
 gsettings set org.gnome.desktop.notifications show-banners false
 gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+gsettings set org.gnome.shell.extensions.dash-to-dock autohide 'true'
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'left'
+gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed 'false'
+gsettings set org.gnome.shell.extensions.dash-to-dock intellihide 'true'
+gsettings set org.gnome.shell.extensions.dash-to-dock multi-monitor 'false'
+gsettings set org.gnome.shell.extensions.dash-to-dock preferred-monitor 0
+gsettings set org.gnome.shell.extensions.dash-to-dock show-trash 'false'
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
+gsettings set org.gnome.mutter workspaces-only-on-primary 'false'
 
 #gsettings set org.gnome.desktop.background show-desktop-icons true
 
