@@ -1,0 +1,56 @@
+#!/bin/sh
+#inkVerbSurfer! verb.ink
+set -e
+
+# This creates a simple "surfer" SSH login script for a remote server
+
+# How to use:
+## ssh-add-gosurfer [surfer name] [remote user] [remote IP] [port - optional]
+
+
+SURFERNAME=$1
+RUSER=$2
+IP=$3
+PORT=$4
+
+# Check if installed
+if [ ! -f ~/.vrk/configs/stationinfo ]; then
+echo "Install Vrk first. See README.md"
+exit 22
+fi
+
+# Check variables
+if [ -z $3 ]; then
+echo "You need to specify stuff, like this:
+ssh-add-gosurfer [surfer name] [remote user] [remote IP] [port - optional]
+"
+exit 22
+fi
+
+# Assign 22 if [port] option is left empty
+if [ -z "${PORT}" ]; then
+PORT=22
+fi
+
+# Confirm the SSH config file
+touch ~/.ssh/config
+chmod 600 ~/.ssh/config
+
+cat <<EOF >> ~/.ssh/config
+Host ad
+    HostName ${IP}
+    User ${RUSER}
+    Port ${PORT}
+EOF
+
+# Create a config
+cat <<EOF > ~/.vrk/go/go.${SURFERNAME}.malibu
+#!/bin/sh
+# This is a Vrk config file with the credentials of a remote ssh host
+GOUSER="${RUSER}"
+GOIP="${IP}"
+GOPORT="${PORT}"
+EOF
+
+# Finish
+echo "Kowabunga! Use 'ssh ${SURFERNAME}' to log in."

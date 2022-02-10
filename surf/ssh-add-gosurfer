@@ -56,9 +56,9 @@ echo "#!/bin/bash
 . /opt/vrk/go/${VRK_USER}/go.${SURFERNAME}.malibu
 
 # Sanitize
-GOUSER="${GOUSER}"
-GOIP="${GOIP}"
-GOPORT="${GOPORT}"
+GOUSER=\"${GOUSER}\"
+GOIP=\"${GOIP}\"
+GOPORT=\"${GOPORT}\"
 
 # Connect
 if [ -z \"\$1\" ]; then

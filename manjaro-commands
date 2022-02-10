@@ -30,6 +30,7 @@ sudo pacman -S libreoffice --noconfirm
 sudo pacman -S atom --noconfirm
 sudo pacman -S git --noconfirm
 sudo pacman -S htop --noconfirm
+sudo pacman -S gpaste --noconfirm
 sudo pacman -S vim --noconfirm
 sudo pacman -S nano --noconfirm
 sudo pacman -S nextcloud-client --noconfirm
