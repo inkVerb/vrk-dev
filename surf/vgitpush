@@ -14,11 +14,11 @@ fi
 
 EXTD_DESCRP=$2
 
+git init
 git add .
 if [ -n "$2" ]; then
-git commit -m "${COMMSG}" -m "${EXTD_DESCRP}"
+git commit -m "${COMMSG}" -m "${EXTD_DESCRP}" --allow-empty
 else
-git commit -m "${COMMSG}"
+git commit -m "${COMMSG}" --allow-empty
 fi
-git push -u origin master
-
+git push -u origin main

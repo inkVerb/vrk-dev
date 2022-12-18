@@ -5,7 +5,7 @@ set -e
 # This sets the proper permissions for your ~/.ssh keys if they do not work to help you log in.
 
 # How to use:
-## ssh-imported
+## ssh-permissions
 
 
 KEYNAME=$1
@@ -17,14 +17,12 @@ echo "Install Vrk first. See README.md"
 exit 22
 fi
 
-# Set permissions
-if [ ! -d ~/.ssh ]; then
-echo "No ssh directory, set up the keys first."
-exit 22
-fi
-
+# Create & set permissions
+mkdir -p ~/.ssh
 chmod 700 ~/.ssh/*
+touch ~/.ssh/config
+chmod 600 ~/.ssh/config
 
 # Finish
-echo "Done. Your keys in .ssh should now have the proper permissions. Your git, ssh, Guake Indicator, FileZilla, or whatever ssh service you are using should work now."
+echo "Done. Your keys in .ssh should now have the proper permissions, ready for git, ssh, FileZilla, or whatever ssh service you are using them for."
 

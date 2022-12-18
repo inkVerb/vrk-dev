@@ -1,6 +1,5 @@
 #!/bin/sh
 #inkVerbSurfer! verb.ink
-set -e
 
 # This retrieves and installs an existing surfer's remote server's rsa key for FileZilla's no-password login
 ## The surfer must already be setup via ssh-add-gosurfer
@@ -21,7 +20,7 @@ exit 22; fi
 # Check variables
 if [ -z $2 ]; then
 echo "You need to specify stuff, like this:
-addfilezillsurfer [surfer] [SSH keyname]
+ssh-add-filezilla [surfer] [SSH keyname]
 "
 exit 22; fi
 

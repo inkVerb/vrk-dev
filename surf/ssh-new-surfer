@@ -1,11 +1,10 @@
 #!/bin/sh
 #inkVerbSurfer! verb.ink
-set -e
 
 # This creates a simple "surfer" SSH login script for a remote server
 
 # How to use:
-## ssh-add-gosurfer [surfer name] [remote user] [remote IP] [port - optional]
+## ssh-new-surfer [surfer name] [remote user] [remote IP] [port - optional]
 
 
 SURFERNAME=$1
@@ -22,7 +21,7 @@ fi
 # Check variables
 if [ -z $3 ]; then
 echo "You need to specify stuff, like this:
-ssh-add-gosurfer [surfer name] [remote user] [remote IP] [port - optional]
+ssh-new-gosurfer [surfer name] [remote user] [remote IP] [port - optional]
 "
 exit 22
 fi

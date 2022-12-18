@@ -1,16 +1,16 @@
 #!/bin/sh
 #inkVerbSurfer! verb.ink
-set -e
 
 # This uploads a local SSH key to a surfer's remote server for user no-password login
 
 # How to use:
-## ssh-add-key [surfer] [SSH_keyname] [server-password]
+## ssh-upload-key [surfer] [SSH_keyname] [server-password] [custom-port (optional)]
 
 
 GOSURFER=$1
 KEYNAME=$2
 PASSWORD=$3
+NEWPORT=$4
 
 # Check if installed
 if [ ! -f ~/.vrk/configs/stationinfo ]; then
@@ -21,9 +21,14 @@ fi
 # Check variables
 if [ -z $3 ]; then
 echo "You need to specify stuff, like this:
-addfilezillsurfer [surfer] [SSH_keyname] [server-password]
+ssh-upload-key [surfer] [SSH_keyname] [server-password] [custom-port (optional)]
 "
 exit 22
+fi
+
+# Assign 22 if [custom-port] option is left empty
+if [ -z $4 ]; then
+NEWPORT=22
 fi
 
 # Include the config
@@ -35,8 +40,5 @@ expect "Password:"
 send "${PASSWORD}\r"
 
 # Finish
-echo "Keys thrown overboard cap'n.
-
-We'll be usin' yer thumbprint from now on.
-"
+echo "Keys uploaded cap'n. No-password connection ready."
 
